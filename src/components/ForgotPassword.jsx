@@ -10,23 +10,21 @@ export default function ForgotPassword() {
     const [loading, setLoading] = useState(false)
     const [message, setMessage] = useState('')
 
-    async function handleSubmit(e){
+    async function handleSubmit(e) {
         e.preventDefault()
-
+    
         try {
-            setMessage('')
-            setError('')
-            setLoading(true)
-            await resetPassword(emailRef.current.value)
-            setMessage("Check your mail for further instructions")
-            
+          setMessage("")
+          setError("")
+          setLoading(true)
+          await resetPassword(emailRef.current.value)
+          setMessage("Check your inbox for further instructions")
         } catch {
-            setError('Failed to sign in')
+          setError("Failed to reset password")
         }
-
+    
         setLoading(false)
-
-    }
+      }
 
   return (
     <>
@@ -34,6 +32,7 @@ export default function ForgotPassword() {
             <Card.Body>
                 <h2 className='text-center mb-3'>Password Reset</h2>
                 {error && <Alert variant='danger'>{error}</Alert>}
+                {message && <Alert variant="success">{message}</Alert>}
                 <Form onSubmit={handleSubmit}>
                     <Form.Group id='email'>
                         <Form.Label>Email</Form.Label>
