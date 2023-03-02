@@ -6,6 +6,8 @@ import { BrowserRouter, Routes, Route} from 'react-router-dom';
 import Dashboard from './components/Dashboard';
 import LogIn from './components/LogIn';
 import ForgotPassword from './components/ForgotPassword';
+import PrivateRoute from './components/PrivateRoute';
+import UpdateProfile from './components/UpdateProfile';
 
 function App() {
   return (
@@ -18,7 +20,10 @@ function App() {
           <BrowserRouter>
             <AuthProvider>
               <Routes>
-                <Route exact path='/' element={<Dashboard/>}/>
+                <Route path='/' element={<PrivateRoute/>}>
+                  <Route exact path='/' element={<Dashboard/>}/>
+                  <Route  path='/update-profile' element={<UpdateProfile/>}/>
+                </Route>
                 <Route path='/signup' element={<SignUp/>} />
                 <Route path='/login' element={<LogIn/>} />
                 <Route path='/forgot-password' element={<ForgotPassword/>} />
